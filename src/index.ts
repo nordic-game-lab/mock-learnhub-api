@@ -11,7 +11,7 @@ app.listen(3000, () => console.log('alive on http://localhost:3000'));
 
 async function isAuth(req, res, next) {
     const auth = req.headers["authorization"];
-    if(auth == "helloTestKey"){
+    if(auth == process.env.API_TOKEN){
         next();
     } else {
         res.sendStatus(401);
