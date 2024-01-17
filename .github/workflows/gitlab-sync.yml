@@ -1,0 +1,23 @@
+name: push gitlab
+
+on:
+  schedule:
+  - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  push:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - run: |
+       git config user.name "Nordic Game Lab Bot"
+       git config user.email renovatebot@nordicgamelab.org
+       git remote add gitlab https://nglbot:${{ secrets.GITLAB_TOKEN }}@gitlab.com/nordicgamelab/ngl-api-testing.git
+       git push -uf gitlab main
