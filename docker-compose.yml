@@ -9,3 +9,5 @@ services:
     environment:
     ports:
       - '5645:3000'
+    volumes:
+      - .:/app
